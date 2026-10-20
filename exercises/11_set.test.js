@@ -9,7 +9,7 @@ test('11_set-1: has an add method and a has method', () => {
     expect(mySet.has(4)).toBe(false);
 });
 
-test.only('11_set-2: doesn`t allow duplicates', () => {
+test('11_set-2: doesn`t allow duplicates', () => {
     // Crea un nou Set
     // Afegeix els següents números al set utilitzant set.add(num): 1, 1, 1
     const mySet = new Set();
