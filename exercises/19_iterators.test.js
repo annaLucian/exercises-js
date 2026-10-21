@@ -1,37 +1,40 @@
 test('19_iterators-1: can get the iterator from an array', () => {
-  const array = [1, 2, 3]
-  // NO MIRIS ELS SEGÜENTS TESTS!
-  const iterator = '?' // com obtens l'iterador?
-  expect(typeof iterator.next === 'function').toBe(true)
-})
+    const array = [1, 2, 3];
+    // NO MIRIS ELS SEGÜENTS TESTS!
+    const iterator = Iterator.from(array); // com obtens l'iterador?
+    expect(typeof iterator.next === 'function').toBe(true);
+});
 
 test('19_iterators-2: can next() the iterator multiple times', () => {
-  const string = 'hello' // <-- SÍ, això és iterable!
-  const iterator = string[Symbol.iterator]()
-  expect(iterator.next()).toEqual(/* INTRODUEIX LA TEVA RESPOSTA AQUÍ */)
-  expect(iterator.next()).toEqual(/* INTRODUEIX LA TEVA RESPOSTA AQUÍ */)
-  expect(iterator.next()).toEqual(/* INTRODUEIX LA TEVA RESPOSTA AQUÍ */)
-  expect(iterator.next()).toEqual(/* INTRODUEIX LA TEVA RESPOSTA AQUÍ */)
-  expect(iterator.next()).toEqual(/* INTRODUEIX LA TEVA RESPOSTA AQUÍ */)
-  expect(iterator.next()).toEqual(/* INTRODUEIX LA TEVA RESPOSTA AQUÍ */)
-  expect(iterator.next()).toEqual(/* INTRODUEIX LA TEVA RESPOSTA AQUÍ */)
-})
+    const string = 'hello'; // <-- SÍ, això és iterable!
+    const iterator = string[Symbol.iterator]();
+    expect(iterator.next()).toEqual({ value: 'h', done: false });
+    expect(iterator.next()).toEqual({ value: 'e', done: false });
+    expect(iterator.next()).toEqual({ value: 'l', done: false });
+    expect(iterator.next()).toEqual({ value: 'l', done: false });
+    expect(iterator.next()).toEqual({ value: 'o', done: false });
+    expect(iterator.next()).toEqual({ value: undefined, done: true });
+    expect(iterator.next()).toEqual({ value: undefined, done: true });
+});
 
 test('19_iterators-3: can iterate over an iterable with for .. of', () => {
-  const array = [1, 2, 3]
-  let sum = 0
-  // escriu un bucle for .. of
-  // que sumi tots els elements de l'array
-  // ex: `sum += val`
-  expect(sum).toBe(6)
-})
+    const array = [1, 2, 3];
+    let sum = 0;
+    // escriu un bucle for .. of
+    for (const val of array) {
+        sum += val;
+    }
+    // que sumi tots els elements de l'array
+    // ex: `sum += val`
+    expect(sum).toBe(6);
+});
 
 test('19_iterators-4: can use the ... operator on the iterator', () => {
-  const set = new Set([1, 2, 2, 3])
-  // Canvia la línia de sota utilitzant destructuring i l’operador rest (`...`) per ignorar el primer element del `Set` i fer que el test passi.
-  const [rest] = set
-  expect(rest).toEqual([2, 3])
-})
+    const set = new Set([1, 2, 2, 3]);
+    // Canvia la línia de sota utilitzant destructuring i l’operador rest (`...`) per ignorar el primer element del `Set` i fer que el test passi.
+    const [one, ...rest] = set;
+    expect(rest).toEqual([2, 3]);
+});
 
 //Els exercicis 5 i 6 són més avançats que la resta del sprint i es consideren opcionals. Pots intentar-los com a repte extra un cop hagis completat la resta d’exercicis.
 
