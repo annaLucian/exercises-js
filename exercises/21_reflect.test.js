@@ -26,7 +26,7 @@ test('21_reflect-2: Reflect.deleteProperty can be used instead of the `delete` k
     expect(protectedDeleted).toBe(false);
 });
 
-test.only(`21_reflect-3: Reflect.ownKeys returns the object's own (not inherited) keys (including symbols)`, () => {
+test(`21_reflect-3: Reflect.ownKeys returns the object's own (not inherited) keys (including symbols)`, () => {
     const exists = Symbol('existance');
     const person = { human: true, [exists]: true };
     const favoriteFeature = Symbol('Fav Feat');
