@@ -1,114 +1,127 @@
+import { jest } from '@jest/globals';
+
 test('27_callbacks-1: Basic callback - invoke callback passing a number', () => {
-  // Crea una funció 'processNumber' que accepti un número i una funció callback
-  // La funció ha d'invocar el callback passant-li el número
+    // Crea una funció 'processNumber' que accepti un número i una funció callback
+    // La funció ha d'invocar el callback passant-li el número
 
-  const processNumber = (/* AFEGEIX PARÀMETRES AQUÍ */) => {
-    /* INTRODUEIX EL TEU CODI AQUÍ */
-  }
+    const processNumber = (num, fn) => {
+        /* INTRODUEIX EL TEU CODI AQUÍ */
+        fn(num);
+    };
 
-  const mockCallback = jest.fn()
-  processNumber(5, mockCallback)
+    const mockCallback = jest.fn();
+    processNumber(5, mockCallback);
 
-  expect(mockCallback).toHaveBeenCalledWith(5)
-  expect(mockCallback).toHaveBeenCalledTimes(1)
-})
+    expect(mockCallback).toHaveBeenCalledWith(5);
+    expect(mockCallback).toHaveBeenCalledTimes(1);
+});
 
 test('27_callbacks-2: Callbacks with mathematical operations - calculator', () => {
-  // Crea una funció 'calculator' que accepti dos números i una funció callback
-  // La funció ha d'invocar el callback amb els dos números com a paràmetres
+    // Crea una funció 'calculator' que accepti dos números i una funció callback
+    // La funció ha d'invocar el callback amb els dos números com a paràmetres
 
-  const calculator = (/* AFEGEIX PARÀMETRES AQUÍ */) => {
-    /* INTRODUEIX EL TEU CODI AQUÍ */
-  }
+    const calculator = (a, b, fn) => {
+        /* INTRODUEIX EL TEU CODI AQUÍ */
+        return fn(a, b);
+    };
 
-  const sum = (a, b) => a + b
-  const result = calculator(3, 4, sum)
+    const sum = (a, b) => a + b;
+    const result = calculator(3, 4, sum);
 
-  expect(result).toBe(7)
-})
+    expect(result).toBe(7);
+});
 
 test('27_callbacks-3: Callbacks in asynchronous functions - wait and greet', (done) => {
-  // Crea una funció 'waitAndGreet' que accepti un nom i un callback
-  // La funció ha d'esperar 2 segons (usa setTimeout) i després invocar el callback amb el nom
+    // Crea una funció 'waitAndGreet' que accepti un nom i un callback
+    // La funció ha d'esperar 2 segons (usa setTimeout) i després invocar el callback amb el nom
 
-  const waitAndGreet = (/* AFEGEIX PARÀMETRES AQUÍ */) => {
-    /* INTRODUEIX EL TEU CODI AQUÍ */
-  }
+    const waitAndGreet = (name, fn) => {
+        /* INTRODUEIX EL TEU CODI AQUÍ */
+        setTimeout(() => {
+            return fn(name);
+        }, 2000);
+    };
 
-  const startTime = Date.now()
+    const startTime = Date.now();
 
-  waitAndGreet('Maria', (name) => {
-    const elapsed = Date.now() - startTime
-    expect(name).toBe('Maria')
-    expect(elapsed).toBeGreaterThanOrEqual(1900) // Tolerància de 100ms
-    expect(elapsed).toBeLessThan(2500)
-    done()
-  })
-}, 3000) // Timeout del test de 3 segons
+    waitAndGreet('Maria', (name) => {
+        const elapsed = Date.now() - startTime;
+        expect(name).toBe('Maria');
+        expect(elapsed).toBeGreaterThanOrEqual(1900); // Tolerància de 100ms
+        expect(elapsed).toBeLessThan(2500);
+        done();
+    });
+}, 3000); // Timeout del test de 3 segons
 
 test('27_callbacks-4: Callbacks with arrays - process elements', () => {
-  // Crea una funció 'processElements' que accepti un array i un callback
-  // La funció ha d'invocar el callback per cada element de l'array
+    // Crea una funció 'processElements' que accepti un array i un callback
+    // La funció ha d'invocar el callback per cada element de l'array
 
-  const processElements = (/* AFEGEIX PARÀMETRES AQUÍ */) => {
-    /* INTRODUEIX EL TEU CODI AQUÍ */
-  }
+    const processElements = (array, fn) => {
+        /* INTRODUEIX EL TEU CODI AQUÍ */
+        return array.map((n) => fn(n));
+    };
 
-  const elements = ['a', 'b', 'c']
-  const results = []
+    const elements = ['a', 'b', 'c'];
+    const results = [];
 
-  processElements(elements, (element) => {
-    results.push(element.toUpperCase())
-  })
+    processElements(elements, (element) => {
+        results.push(element.toUpperCase());
+    });
 
-  expect(results).toEqual(['A', 'B', 'C'])
-})
-
-test('27_callbacks-5: Process string with callback - transform to uppercase', (done) => {
-  // Crea una funció 'processString' que accepti una cadena i un callback
-  // La funció ha de convertir la cadena a majúscules i després invocar el callback
-  // amb la cadena transformada
-
-  const processString = (/* AFEGEIX PARÀMETRES AQUÍ */) => {
-    /* INTRODUEIX EL TEU CODI AQUÍ */
-  }
-
-  processString('hola món', (transformedString) => {
-    expect(transformedString).toBe('HOLA MÓN')
-    done()
-  })
-})
+    expect(results).toEqual(['A', 'B', 'C']);
+});
 
 test('27_callbacks-5: Process string with callback - transform to uppercase', (done) => {
-  const processString = (/* ... */) => {
-    /* ... */
-  }
+    // Crea una funció 'processString' que accepti una cadena i un callback
+    // La funció ha de convertir la cadena a majúscules i després invocar el callback
+    // amb la cadena transformada
 
-  processString('hola món', (transformedString) => {
-    expect(transformedString).toBe('HOLA MÓN')
-    done()
-  })
-})
+    const processString = (string, fn) => {
+        /* INTRODUEIX EL TEU CODI AQUÍ */
+        const upperStr = string.toUpperCase();
+        return fn(upperStr);
+    };
+
+    processString('hola món', (transformedString) => {
+        expect(transformedString).toBe('HOLA MÓN');
+        done();
+    });
+});
+
+test('27_callbacks-5: Process string with callback - transform to uppercase', (done) => {
+    const processString = (string, fn) => {
+        const upperCaseString = string.toUpperCase();
+        return fn(upperCaseString);
+    };
+
+    processString('hola món', (transformedString) => {
+        expect(transformedString).toBe('HOLA MÓN');
+        done();
+    });
+});
 
 test('27_callbacks-6: Chained callbacks - multiple transformations', () => {
-  // Crea funcions que demostrin callbacks encadenats
-  // Primer duplica un número, després suma 10, finalment mostra el resultat
+    // Crea funcions que demostrin callbacks encadenats
+    // Primer duplica un número, després suma 10, finalment mostra el resultat
 
-  const double = (num, callback) => {
-    /* INTRODUEIX EL TEU CODI AQUÍ */
-  }
+    const double = (num, callback) => {
+        const doubleNum = num * 2;
+        return callback(doubleNum);
+    };
 
-  const addTen = (num, callback) => {
-    /* INTRODUEIX EL TEU CODI AQUÍ */
-  }
+    const addTen = (num, callback) => {
+        const sumThen = num + 10;
+        return callback(sumThen);
+    };
 
-  let finalResult
+    let finalResult;
 
-  double(5, (result1) => {
-    addTen(result1, (result2) => {
-      finalResult = result2
-    })
-  })
+    double(5, (result1) => {
+        addTen(result1, (result2) => {
+            finalResult = result2;
+        });
+    });
 
-  expect(finalResult).toBe(20) // (5 * 2) + 10 = 20
-})
+    expect(finalResult).toBe(20); // (5 * 2) + 10 = 20
+});
